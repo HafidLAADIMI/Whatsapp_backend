@@ -91,12 +91,21 @@ public class ChatController {
             return new ResponseEntity<>("There was an error in getting the users", HttpStatus.BAD_REQUEST);
         }
     }
-
-    // get message by receiverId
-    @GetMapping("/message/getByReceiverId/{receiverId}")
-    public ResponseEntity<?> getMessagesByReceiverId(@PathVariable String receiverId) {
+    // get user by id
+    @GetMapping("/user/getById/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable String id) {
         try {
-            return new ResponseEntity<>(messageService.findMessagesByReceiverId(receiverId), HttpStatus.OK);
+            return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("There was an error in getting the user", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // get message by receiverId and senderId
+    @GetMapping("/message/getChatMessages/{senderId}/{receiverId}")
+    public ResponseEntity<?> getChatMessages(@PathVariable String receiverId , @PathVariable String senderId) {
+        try {
+            return new ResponseEntity<>(messageService.findChatMessage(senderId,receiverId), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("There was an error in getting the messages", HttpStatus.BAD_REQUEST);
         }

@@ -24,4 +24,12 @@ public class MessageService {
     public Iterable<Message> findMessagesByReceiverId(String receiverId) {
         return repo.findByReceiverId(receiverId);
     }
+
+    public Iterable<Message> findMessagesByReceiverIdAndSenderId(String receiverId, String senderId) {
+        return repo.findByReceiverIdAndSenderId(receiverId, senderId);
+    }
+
+    public Iterable<Message> findChatMessage(String senderId, String receiverId) {
+        return repo.findChatMessages(senderId, receiverId);
+    }
 }
